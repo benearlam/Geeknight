@@ -8,8 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="neo4j-spatial-0.11-neo4j-1.9-server-plugin" level="project" />
-    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" exported="" name="neo4j-spatial-0.11-neo4j-1.9-server-plugin" level="project" />
+    <orderEntry type="library" exported="" name="junit" level="project" />
   </component>
 </module>
 
