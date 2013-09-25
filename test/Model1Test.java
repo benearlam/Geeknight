@@ -26,70 +26,13 @@ public class Model1Test {
     }
 
     @Test
-   /*
-        firswood -1-> old trafford -2-> cornbrook -4-> city centre --
-                                          |                          |
-                                          |                          /
-                                           -8-> media city <-16---- /
-     */
-    public void shouldFindTheQuickestPathBetweenFirswoodAndMediaCity() throws Exception {
-        GraphDatabaseService graphDatabaseService = new GraphDatabaseFactory().newEmbeddedDatabase(graphName);
-        Node firswood, mediaCity = null;
-        Transaction tx = graphDatabaseService.beginTx();
-        try {
-            firswood = graphDatabaseService.createNode();
-            firswood.setProperty("name", "firswood");
-
-            Node oldTrafford = graphDatabaseService.createNode();
-            oldTrafford.setProperty("name", "old trafford");
-
-            Node cornbrook = graphDatabaseService.createNode();
-            cornbrook.setProperty("name", "cornbrook");
-
-            Node cityCentre = graphDatabaseService.createNode();
-            cityCentre.setProperty("name", "city centre");
-
-            mediaCity = graphDatabaseService.createNode();
-            mediaCity.setProperty("name", "media city");
-
-            Relationship goesToRelationship = firswood.createRelationshipTo(oldTrafford, TransportRelationshipTypes.GOES_TO);
-            goesToRelationship.setProperty("duration", 1);
-
-            goesToRelationship = oldTrafford.createRelationshipTo(cornbrook, TransportRelationshipTypes.GOES_TO);
-            goesToRelationship.setProperty("duration", 2);
-
-            goesToRelationship = cornbrook.createRelationshipTo(cityCentre, TransportRelationshipTypes.GOES_TO);
-            goesToRelationship.setProperty("duration", 4);
-
-            goesToRelationship = cornbrook.createRelationshipTo(mediaCity, TransportRelationshipTypes.GOES_TO);
-            goesToRelationship.setProperty("duration", 8);
-
-            goesToRelationship = cityCentre.createRelationshipTo(mediaCity, TransportRelationshipTypes.GOES_TO);
-            goesToRelationship.setProperty("duration", 16);
-
-            tx.success();
-
-        } finally {
-            tx.finish();
-        }
-
-
-        PathFinder<WeightedPath> duration = GraphAlgoFactory.dijkstra(Traversal.expanderForAllTypes(), CommonEvaluators.doubleCostEvaluator("duration"));
-        WeightedPath singlePath = duration.findSinglePath(firswood, mediaCity);
-
-
-        System.out.print(singlePath.toString());
-        assertThat(singlePath.weight(), is(11d));
-    }
-
-    @Test
     /*
         firswood -1-> old trafford -2-> cornbrook -4-> city centre --
                                           |                          |
                                           |                          /
                                            -8-> media city <-16---- /
      */
-    public void shouldFindTheQuickestPathBetweenFirswoodAndMediaCityUsingIndexLookup() throws Exception {
+    public void shouldFindTheQuickestPathBetweenFirswoodAndMediaCity() throws Exception {
         GraphDatabaseService graphDatabaseService = new GraphDatabaseFactory().newEmbeddedDatabase(graphName);
         buildGraph(graphDatabaseService);
         Index<Node> tramStations = graphDatabaseService.index().forNodes("tramStations");
