@@ -1,0 +1,26 @@
+HEADERS:
+    Accept: application/json; charset=UTF-8
+    Content-Type: application/json
+
+
+URI: http://localhost:7474/db/data/node/1/paths
+BODY:
+{
+    "to" : "http://localhost:7474/db/data/node/5",
+    "cost_property" : "duration",
+    "relationships" : {
+    "type" : "GOES_TO",
+    "direction" : "out"
+  },
+  "algorithm" : "dijkstra"
+}
+
+URI : http://localhost:7474/db/data/cypher
+Cypher least cost path:
+{
+  "query" : "START  startNode=node:tramStations(name={startName}),endNode=node:tramStations(name={endName}) MATCH  p=(startNode)-[:GOES_TO*]->(endNode) RETURN p AS shortestPath,  reduce(weight=0, r in relationships(p) : weight+r.duration) AS totalWeight ORDER BY totalWeight ASC LIMIT 1",
+  "params" : {
+    "startName" : "firswood",
+    "endName" : "media city"
+  }
+}

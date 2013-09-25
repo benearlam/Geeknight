@@ -1,0 +1,7 @@
+START  startNode=node:tramStations(name='firswood'),
+       endNode=node:tramStations(name='media city')
+MATCH  p=(startNode)-[:GOES_TO*]->(endNode)
+RETURN p AS shortestPath,
+       reduce(weight=0, r in relationships(p) : weight+r.duration) AS totalWeight
+       ORDER BY totalWeight ASC
+       LIMIT 1

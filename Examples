@@ -14,6 +14,7 @@ Get node by name 3:
 	start n=node:tramStations("name:firswood") return n
 
 Least cost Path:
+
 START  startNode=node:tramStations(name='firswood'),
        endNode=node:tramStations(name='media city')
 	MATCH  p=(startNode)-[:GOES_TO*]->(endNode)
@@ -49,6 +50,7 @@ Least cost Path:
 	  "algorithm" : "dijkstra"
 	}
 
+URI : http://localhost:7474/db/data/cypher
 Cypher least cost path:
 {
   "query" : "START  startNode=node:tramStations(name={startName}),endNode=node:tramStations(name={endName}) MATCH  p=(startNode)-[:GOES_TO*]->(endNode) RETURN p AS shortestPath,  reduce(weight=0, r in relationships(p) : weight+r.duration) AS totalWeight ORDER BY totalWeight ASC LIMIT 1",
