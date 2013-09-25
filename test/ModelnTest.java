@@ -29,14 +29,9 @@ public class ModelnTest {
     }
 
     @Test
-    /*
-        firswood -1-> old trafford -2-> cornbrook -4-> city centre --
-                                          |                          |
-                                          |                          /
-                                           -8-> media city <-16---- /
-     */
     public void shouldFindTheQuickestPathBetweenFirswoodAndMediaCity() throws Exception {
-        createRouteTrip("firswood 3 old-trafford 4 cornbrook 5 city-centre", "route1");
+        createRouteTrip("firswood 2 old-trafford 4 cornbrook 8 city-centre", "route1");
+        createRouteTrip("deansgate 2 cornbrook 3 city-centre", "route2");
 
         Index<Node> tramStations = graphDatabaseService.index().forNodes("tramStations");
 
@@ -49,7 +44,7 @@ public class ModelnTest {
 
 
         System.out.print(singlePath.toString());
-        assertThat(singlePath.weight(), is(11d));
+        assertThat(singlePath.weight(), is(9d));
     }
 
     private void createRouteTrip(String description, String routeId) {

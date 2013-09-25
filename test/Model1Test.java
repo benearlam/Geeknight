@@ -49,7 +49,8 @@ public class Model1Test {
     }
 
     private void buildGraph(GraphDatabaseService graphDatabaseService) {
-        Index<Node> tramStations;Transaction tx = graphDatabaseService.beginTx();
+        Index<Node> tramStations;
+        Transaction tx = graphDatabaseService.beginTx();
         try {
             tramStations = graphDatabaseService.index().forNodes("tramStations");
 
